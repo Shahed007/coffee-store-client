@@ -7,7 +7,7 @@ import Navbar from "../componets/navbar/Navbar";
 
 const MainLayout = () => {
   return (
-    <div className="font-raleway">
+    <div className="font-raleway relative overflow-x-hidden">
     <header className="w-full">
      <div className="py-4 h-20 flex items-center justify-center gap-1" style={{backgroundImage: `url(${headerBanner})`, backgroundSize: 'cover', backgroundPosition:'center cener'}}>
       <img className="h-16" src={logo} alt="Coffee Logo" />

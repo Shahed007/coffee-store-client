@@ -1,0 +1,6 @@
+.main-nav .active {
+  background-image: url('../../assets/images/more/24.jpg');
+  height: 100%;
+  width: 100%;
+  display: block;
+}
