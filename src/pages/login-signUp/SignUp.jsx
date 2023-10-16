@@ -28,6 +28,8 @@ const [signUpErr, setSignUpErr] = useState({
     const photo = form.get('photo');
     const trams = e.target.trams.checked;
     
+    const user = {name, email, photo};
+    
     setSignUpErr({...signUpErr, trams: null, pass: null, email: null});
     if(password.length < 6){
      return setSignUpErr({...signUpErr, pass: 'Password must be 6 character or longer'});
@@ -41,9 +43,17 @@ const [signUpErr, setSignUpErr] = useState({
     }
 
     createUser(email, password)
-    .then(result => {
+    .then(() => {
       profileUpdate(name, photo)
-      console.log(result.user);
+      fetch('http://localhost:5000/users', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(user)
+      })
+      .then(res=> res.json())
+      .then(data => console.log(data))
     })
     .catch(err => console.log(err.message))
     console.log(name, email, password);
