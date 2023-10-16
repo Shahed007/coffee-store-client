@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&family=Rancho&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.text-shadow{
+  text-shadow: 0 2px 4px #331A15;
+}
+
+.text-shadow2{
+  text-shadow: 0 2px 4px #374151;
+}
