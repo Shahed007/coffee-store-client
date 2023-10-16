@@ -8,11 +8,11 @@ import {
 import {Link} from "react-router-dom";
  
 import banner from "../../assets/images/more/6.jpeg";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthProvider";
 
 const SignUp = () => {
-
-
+const {createUser, profileUpdate} = useContext(AuthContext);
 const [signUpErr, setSignUpErr] = useState({
   trams: null,
   pass: null,
@@ -25,6 +25,7 @@ const [signUpErr, setSignUpErr] = useState({
     const name = form.get('name');
     const email = form.get('email');
     const password = form.get('password');
+    const photo = form.get('photo');
     const trams = e.target.trams.checked;
     
     setSignUpErr({...signUpErr, trams: null, pass: null, email: null});
@@ -38,6 +39,13 @@ const [signUpErr, setSignUpErr] = useState({
     if(!trams){
       return setSignUpErr({ signUpErr, trams:'You have must accept trams & condition'})
     }
+
+    createUser(email, password)
+    .then(result => {
+      profileUpdate(name, photo)
+      console.log(result.user);
+    })
+    .catch(err => console.log(err.message))
     console.log(name, email, password);
   }
   return (
