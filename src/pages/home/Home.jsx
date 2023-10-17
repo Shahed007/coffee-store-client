@@ -1,4 +1,4 @@
-import { useLoaderData, useLocation, useNavigation } from "react-router-dom";
+import { useLoaderData, useNavigation } from "react-router-dom";
 import HeroBanner from "./heroBanner/HeroBanner";
 import Products from "./products/Products";
 import QualitySection from "./qualitySection/QualitySection";
@@ -24,7 +24,7 @@ const Home = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         
-        fetch(`http://localhost:5000/coffees/${_id}`, {
+        fetch(`https://my-coffee-store-server-42luiy345-md-shaheds-projects.vercel.app/coffees/${_id}`, {
           method: 'DELETE',
         })
         .then(res => res.json())

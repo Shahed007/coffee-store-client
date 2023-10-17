@@ -51,7 +51,7 @@ const [signUpErr, setSignUpErr] = useState({
       const lastSignIn = result.user?.metadata?.lastSignInTime;
       console.log(creation);
       const user = {name, email, photo, creation, lastSignIn};
-      fetch('http://localhost:5000/users', {
+      fetch('https://my-coffee-store-server-42luiy345-md-shaheds-projects.vercel.app/users', {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
@@ -69,7 +69,7 @@ const [signUpErr, setSignUpErr] = useState({
       e.target.reset();
       // window.location.reload();
       // navigate('/');
-      location.replace(location.href = 'http://localhost:5173/');
+      location.replace(location.href = 'https://coffee-store-client.web.app/');
     })
     .catch(err => {
       if(err.message === 'Firebase: Error (auth/email-already-in-use).'){

@@ -19,7 +19,7 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home></Home>,
-        loader: async()=> fetch('http://localhost:5000/coffees'),
+        loader: async()=> fetch('https://my-coffee-store-server-42luiy345-md-shaheds-projects.vercel.app/coffees'),
       },
       {
         path: '/addNewCoffee',
@@ -29,20 +29,20 @@ const router = createBrowserRouter([
         path: '/productDetails/:id',
         element: <ProductDetails></ProductDetails>,
         loader: async({params})=> {
-          return fetch(`http://localhost:5000/coffees/${params.id}`)
+          return fetch(`https://my-coffee-store-server-42luiy345-md-shaheds-projects.vercel.app/coffees/${params.id}`)
         }
       },
       {
         path: '/updateCoffee/:id',
         element: <UpdateCoffee></UpdateCoffee>,
         loader: async({params})=> {
-          return fetch(`http://localhost:5000/coffees/${params.id}`)
+          return fetch(`https://my-coffee-store-server-42luiy345-md-shaheds-projects.vercel.app/coffees/${params.id}`)
         }
       },
       {
         path: '/users',
         element: <Users></Users>,
-        loader: async()=> fetch('http://localhost:5000/users')
+        loader: async()=> fetch('https://my-coffee-store-server-42luiy345-md-shaheds-projects.vercel.app/users')
       },
       {
         path: '/SignIn',
