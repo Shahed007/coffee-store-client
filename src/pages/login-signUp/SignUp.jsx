@@ -10,6 +10,7 @@ import {Link} from "react-router-dom";
 import banner from "../../assets/images/more/6.jpeg";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthProvider";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
 const {createUser, profileUpdate} = useContext(AuthContext);
@@ -28,7 +29,7 @@ const [signUpErr, setSignUpErr] = useState({
     const photo = form.get('photo');
     const trams = e.target.trams.checked;
     
-    const user = {name, email, photo};
+    
     
     setSignUpErr({...signUpErr, trams: null, pass: null, email: null});
     if(password.length < 6){
@@ -43,8 +44,12 @@ const [signUpErr, setSignUpErr] = useState({
     }
 
     createUser(email, password)
-    .then(() => {
-      profileUpdate(name, photo)
+    .then((result) => {
+      profileUpdate(name, photo);
+      const creation = result.user?.metadata?.creationTime;
+      const lastSignIn = result.user?.metadata?.lastSignInTime;
+      console.log(creation);
+      const user = {name, email, photo, creation, lastSignIn};
       fetch('http://localhost:5000/users', {
         method: 'POST',
         headers: {
@@ -54,9 +59,19 @@ const [signUpErr, setSignUpErr] = useState({
       })
       .then(res=> res.json())
       .then(data => console.log(data))
+      Swal.fire({
+        title: 'success',
+        text: 'SignUp successful',
+        icon: 'success',
+        confirmButtonText: 'Cool'
+      })
+      e.target.reset();
     })
-    .catch(err => console.log(err.message))
-    console.log(name, email, password);
+    .catch(err => {
+      if(err.message === 'Firebase: Error (auth/email-already-in-use).'){
+        setSignUpErr({...signUpErr, email: 'This email already in use'})
+      }
+    })
   }
   return (
     <section style={{backgroundImage: `url(${banner})`, backgroundSize: 'cover', backgroundPosition: 'center center'}}>
@@ -73,6 +88,9 @@ const [signUpErr, setSignUpErr] = useState({
       <div className="mb-4 flex flex-col gap-6 text-white">
         <Input required color="white" size="lg" label="Name" name="name" className="text-white" />
         <Input required color="white" size="lg" label="Email" name="email" className="text-white" />
+        <p className={`text-red-500 bg-white/40 p-1 rounded-sm ${signUpErr.email ? 'block': 'hidden'}`}>
+            {signUpErr.email && signUpErr.email}
+          </p>
         <Input required color="white" type="password" size="lg" name="password" label="Password" className="text-white" />
           <p className={`text-red-500 bg-white/40 p-1 rounded-sm ${signUpErr.pass ? 'block': 'hidden'}`}>
             {signUpErr.pass && signUpErr.pass}

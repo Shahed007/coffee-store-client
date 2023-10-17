@@ -1,9 +1,12 @@
-import {Link, NavLink} from "react-router-dom";
+import { Link, NavLink} from "react-router-dom";
 import navBanner from "../../assets/images/more/24.jpg";
 import "./Navbar.css";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthProvider";
 
 
 const Navbar = () => {
+  const {user} = useContext(AuthContext);
   const links = (
     <>
       <li className="">
@@ -26,13 +29,34 @@ const Navbar = () => {
   return (
     <nav className="bg-[#362626]">
     <div className="max-w-7xl mx-auto px-3 py-4 flex justify-between items-center">
-      <Link to="/" className="text-3xl text-white font-roncho">Coffee Store</Link>
 
       <ul className="flex items-center gap-6 text-white text-lg main-nav">
         {links}
       </ul>
 
-      <div></div>
+      <div>
+        {
+          user ? 
+          <div>
+          <button  className="h-16 w-32 group shadow shadow-gray-400 duration-200 hover:shadow-gray-500 hover:shadow-md flex items-center justify-between  rounded-full">
+          <div className="h-14 w-14 rounded-full  border-4 border-white duration-200 border-s-2 shadow-sm">
+          <img className="h-14 rounded-full w-14 object-cover" src={user.photoURL} alt={`photo of ${user.displayName}`} />
+          </div>
+          <span className="white">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-white duration-200 group-hover:rotate-90">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+
+          </span>
+          </button>
+          <div></div>
+          </div>
+          :
+          <Link to="/signUp">
+            Sign Up
+          </Link>
+        }
+      </div>
     </div>
     </nav>
   )
