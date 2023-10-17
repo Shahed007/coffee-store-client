@@ -1,4 +1,4 @@
-import { useLoaderData, useNavigation } from "react-router-dom";
+import { useLoaderData, useLocation, useNavigation } from "react-router-dom";
 import HeroBanner from "./heroBanner/HeroBanner";
 import Products from "./products/Products";
 import QualitySection from "./qualitySection/QualitySection";
@@ -10,6 +10,7 @@ const Home = () => {
   const loadCoffees = useLoaderData();
   const navigation = useNavigation();
   const [coffees, setCoffees] = useState(loadCoffees);
+
 
   const handleDelete = _id => {
     Swal.fire({

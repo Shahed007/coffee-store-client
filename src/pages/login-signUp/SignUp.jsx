@@ -19,6 +19,7 @@ const [signUpErr, setSignUpErr] = useState({
   pass: null,
   email: null,
 })
+
   const handleSignUp = e => {
     e.preventDefault();
 
@@ -66,6 +67,9 @@ const [signUpErr, setSignUpErr] = useState({
         confirmButtonText: 'Cool'
       })
       e.target.reset();
+      // window.location.reload();
+      // navigate('/');
+      location.replace(location.href = 'http://localhost:5173/');
     })
     .catch(err => {
       if(err.message === 'Firebase: Error (auth/email-already-in-use).'){
