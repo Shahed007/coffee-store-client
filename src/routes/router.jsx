@@ -41,7 +41,8 @@ const router = createBrowserRouter([
       },
       {
         path: '/users',
-        element: <Users></Users>
+        element: <Users></Users>,
+        loader: async()=> fetch('http://localhost:5000/users')
       },
       {
         path: '/SignIn',
